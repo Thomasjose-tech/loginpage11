@@ -12,9 +12,20 @@ export default function Dashboard() {
     }
   }, [router]);
 
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    router.push("/login");
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <h1 className="text-4xl font-bold">Welcome to Dashboard</h1>
+    <div className="min-h-screen bg-white text-black relative">
+      <h1 className="text-2xl font-bold absolute top-4 left-4">Welcome to Dashboard</h1>
+      <button
+        onClick={handleLogout}
+        className="absolute top-4 right-4 px-4 py-2 bg-red-500 text-white rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-red-600"
+      >
+        Logout
+      </button>
     </div>
   );
 }
