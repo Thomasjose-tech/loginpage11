@@ -2,7 +2,7 @@ import "./globals.css";
 import Head from "next/head";
 
 export const metadata = {
-  title: "my-auth-app",
+  title: "my auth app",
   description: "Register and Login with Tailwind and Next.js",
 };
 
