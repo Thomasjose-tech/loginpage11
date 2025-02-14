@@ -14,7 +14,7 @@ export default function Register() {
   const [showTerms, setShowTerms] = useState(false);
   const [termsChecked, setTermsChecked] = useState(false);
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     // Check for alphabet-only first name and last name
@@ -40,12 +40,21 @@ export default function Register() {
       return;
     }
 
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ firstName, lastName, username, password })
-    );
-    alert("Registration Successful!");
-    router.push("/login");
+    // Send registration data to the server
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ firstName, lastName, username, password }),
+    });
+
+    if (res.ok) {
+      alert("Registration Successful!");
+      router.push("/login");
+    } else {
+      alert("Registration failed. Please try again.");
+    }
   };
 
   const handleGoogleSignIn = () => {
